@@ -27,7 +27,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Download heroku
-        run: sudo curl https://cli-assets.heroku.com/install.sh | sh
+      - run: sudo curl https://cli-assets.heroku.com/install.sh | sh
         
       - name: push to heroku repo
       - run: git push heroku main
