@@ -1,25 +1,23 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.storage = exports.db = exports.auth = void 0;
 // Import the functions you need from the SDKs you need
 const app_1 = require("firebase/app");
 // import {getAnalytics} from "firebase/analytics";
-const expo_constants_1 = __importDefault(require("expo-constants"));
 const auth_1 = require("firebase/auth");
 const firestore_1 = require("firebase/firestore");
 const storage_1 = require("firebase/storage");
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 const firebaseConfig = {
-    apiKey: expo_constants_1.default.manifest.extra.apiKey,
-    authDomain: expo_constants_1.default.manifest.extra.authDomain,
-    projectId: expo_constants_1.default.manifest.extra.projectId,
-    storageBucket: expo_constants_1.default.manifest.extra.storageBucket,
-    messagingSenderId: expo_constants_1.default.manifest.extra.messagingSenderId,
-    appId: expo_constants_1.default.manifest.extra.appId,
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
 };
 // // Initialize Firebase
 const app = (0, app_1.initializeApp)(firebaseConfig);
