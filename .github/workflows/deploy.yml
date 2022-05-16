@@ -26,8 +26,10 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Download heroku and push
+      - name: Download heroku
       
-      - run: sudo curl https://cli-assets.heroku.com/install.sh | sh
+        run: sudo curl https://cli-assets.heroku.com/install.sh | sh
         
-      - run: git push heroku main
+      - name: Push to heroku repo
+      
+        run: git push heroku main
