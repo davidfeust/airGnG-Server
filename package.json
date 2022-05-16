@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "main": "dist/src/index.js",
+	"engines": {
+		"npm": "6.x"
+	},
     "scripts": {
         "prebuild": "npm install && tslint -c tslint.json -p tsconfig.json --fix",
         "build": "tsc",
