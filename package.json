@@ -3,15 +3,15 @@
     "version": "1.0.0",
     "description": "",
     "main": "dist/src/index.js",
-	"engines": {
-		"npm": "6.x"
-	},
+    "engines": {
+        "npm": "6.x"
+    },
     "scripts": {
-        "prebuild": "npm install && tslint -c tslint.json -p tsconfig.json --fix",
+        "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
         "build": "tsc",
         "prestart": "npm run build",
         "start:dev": "tsnd --respawn src/index.ts",
-        "start": "node src/index.ts",
+        "start": "node dist/src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
