@@ -32,4 +32,6 @@ jobs:
         
       - name: Push to heroku repo
       
-        run: git push heroku main
+        run: |
+          git remote add heroku https://git.heroku.com/airgng-app.git
+          git push heroku main
