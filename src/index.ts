@@ -13,7 +13,7 @@ app.use(cors());
 export const connections: connection[] = [];
 
 const port = process.env.PORT || 5000; // default port to listen
-const webSocketPort = 8000;
+const webSocketPort = 8080;
 server.listen(webSocketPort);
 const wsServer = new webSocketServer({ httpServer: server });
 wsServer.on('request', (req) => {
