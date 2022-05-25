@@ -19,10 +19,10 @@ const wsServer = new webSocketServer({ httpServer: server });
 wsServer.on('request', (req) => {
     // tslint:disable-next-line:no-console
     console.log(`web socket got request`);
-    const connection = req.accept(null, req.origin);
+    const theConnection = req.accept(null, req.origin);
     // tslint:disable-next-line:no-console
-    console.log('connection:' + connection.state);
-    connections.push(connection);
+    console.log('connection:' + theConnection.state);
+    connections.push(theConnection);
 });
 
 // define a route handler for the default home page

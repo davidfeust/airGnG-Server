@@ -32,8 +32,8 @@ router.post('/', async (req: Request, res) => {
         date_start: new Date(order.reservation.date_start),
     };
     addDoc(collection(db, 'orders'), order)
-        .then((doc) => {
-            res.send(doc.id);
+        .then((addedDoc) => {
+            res.send(addedDoc.id);
             connections.forEach((connection) => {
                 connection.send('order-added');
             });
