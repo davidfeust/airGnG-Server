@@ -12,12 +12,10 @@ const handleOrders_1 = __importDefault(require("./handleOrders"));
 const handleStations_1 = __importDefault(require("./handleStations"));
 const handleUsers_1 = __importDefault(require("./handleUsers"));
 const app = (0, express_1.default)();
-const server = http_1.default.createServer();
+const server = http_1.default.createServer(app);
 app.use((0, cors_1.default)());
 exports.connections = [];
 const port = process.env.PORT || 5000; // default port to listen
-const webSocketPort = 8080;
-server.listen(webSocketPort);
 const wsServer = new websocket_1.server({ httpServer: server });
 wsServer.on('request', (req) => {
     // tslint:disable-next-line:no-console
@@ -37,7 +35,7 @@ app.use('/stations', handleStations_1.default);
 app.use('/users', handleUsers_1.default);
 app.use('/orders', handleOrders_1.default);
 // start the Express server
-app.listen(port, () => {
+server.listen(port, () => {
     // tslint:disable-next-line:no-console
     console.log(`server started at http://localhost:${port}`);
 });
