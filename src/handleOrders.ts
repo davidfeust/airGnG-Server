@@ -2,9 +2,9 @@
 import express, { Request } from 'express';
 import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { getFromCol } from './utils/GlobalFunctions';
-import { Order } from './index.d';
 import { connections } from './index';
+import { Order } from './index.d';
+import { getFromCol } from './utils/GlobalFunctions';
 const router = express.Router();
 
 router.use((req, res, next) => {

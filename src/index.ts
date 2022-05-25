@@ -1,10 +1,10 @@
 import cors from 'cors';
 import express from 'express';
+import http from 'http';
+import { connection, server as webSocketServer } from 'websocket';
+import handleOrders from './handleOrders';
 import handleStations from './handleStations';
 import handleUsers from './handleUsers';
-import handleOrders from './handleOrders';
-import { connection, server as webSocketServer } from 'websocket';
-import http from 'http';
 
 const app = express();
 const server = http.createServer();

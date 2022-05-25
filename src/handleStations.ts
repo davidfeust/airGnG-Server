@@ -1,11 +1,10 @@
 // (/stations)
 import express, { Request } from 'express';
-import { addDoc, collection, deleteDoc, doc, getDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
 import { Station } from './index.d';
 import { getFromCol } from './utils/GlobalFunctions';
-import { connections } from './index';
 const router = express.Router();
 
 router.use((req, res, next) => {
