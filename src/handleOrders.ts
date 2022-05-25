@@ -1,9 +1,10 @@
 // (/orders)
 import express, { Request } from 'express';
-import { doc, getDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { getFromCol } from './utils/GlobalFunctions';
 import { Order } from './index.d';
+import { connections } from './index';
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -19,6 +20,28 @@ router.get('/', async (req, res) => {
         orders = map;
     });
     res.json(orders);
+});
+
+router.post('/', async (req: Request, res) => {
+    // tslint:disable-next-line:no-console
+    console.log('got request for POST orders/');
+    const order = req.body;
+    order.order_date = new Date(order.order_date);
+    order.reservation = {
+        date_finish: new Date(order.reservation.date_finish),
+        date_start: new Date(order.reservation.date_start),
+    };
+    addDoc(collection(db, 'orders'), order)
+        .then((doc) => {
+            res.send(doc.id);
+            connections.forEach((connection) => {
+                connection.send('order-added');
+            });
+        })
+        .catch((reason) => {
+            // tslint:disable-next-line:no-console
+            console.error(reason);
+        });
 });
 
 router.get('/:id', async (req: Request<{ id: string }>, res) => {
