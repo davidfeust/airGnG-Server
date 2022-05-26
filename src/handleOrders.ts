@@ -1,16 +1,12 @@
 // (/orders)
-import express, { Request } from 'express';
-import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
+import express, { Request, Response } from 'express';
+import { addDoc, collection, doc, getDoc, WhereFilterOp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { connections } from './index';
 import { Order } from './index.d';
-import { getFromCol } from './utils/GlobalFunctions';
+import { getFromCol, getFromColWhere } from './utils/GlobalFunctions';
 const router = express.Router();
 
-router.use((req, res, next) => {
-    // console.log('Time: ', Date.now());
-    next();
-});
 
 router.get('/', async (req, res) => {
     // tslint:disable-next-line:no-console
@@ -54,4 +50,18 @@ router.get('/:id', async (req: Request<{ id: string }>, res) => {
         res.sendStatus(404);
     }
 });
+
+router.get('/:x/:condition/:y', async (req: Request<{ x: string, condition: WhereFilterOp, y: string | any[] }>,
+    res: Response<Order[]>) => {
+
+    // tslint:disable-next-line:no-console
+    console.log('got request for station where:' + Object.values(req.params));
+
+    const { x, condition, y } = req.params;
+    let orders: Order[];
+    orders = await getFromColWhere('orders', x, condition, y) as Order[];
+
+    res.json(orders);
+});
+
 export default router;
